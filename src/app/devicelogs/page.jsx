@@ -7,12 +7,12 @@ import toast, { Toaster } from 'react-hot-toast';
 const fetchDeviceLogs = async ({ queryKey }) => {
   const [_, table, userId] = queryKey;
   if (!table || !userId) return [];
-  const { data } = await axios.get('http://localhost:3001/api/devicelogs', { params: { table, userId } });
+  const { data } = await axios.get('http://192.168.45.129:5000/api/devicelogs', { params: { table, userId } });
   return data;
 };
 
 const updateDeviceLog = async ({ id, table, ...updateData }) => {
-  const { data } = await axios.put(`http://localhost:3001/api/devicelogs/${id}`, { table, ...updateData });
+  const { data } = await axios.put(`http://192.168.45.129:5000/api/devicelogs/${id}`, { table, ...updateData });
   return data;
 };
 
