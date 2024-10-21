@@ -12,12 +12,12 @@ export default function AttenInfo() {
 
   const { data: attenInfoData, isLoading, error } = useQuery({
     queryKey: ['attenInfo', searchTicketNo],
-    queryFn: () => axios.get(`http://localhost:3001/api/atteninfo?ticketNo=${searchTicketNo}`).then(res => res.data),
+    queryFn: () => axios.get(`http://192.168.45.129:5000/api/atteninfo?ticketNo=${searchTicketNo}`).then(res => res.data),
     enabled: !!searchTicketNo,
   });
 
   const updateMutation = useMutation({
-    mutationFn: (updatedEntry) => axios.put(`http://localhost:3001/api/atteninfo/${updatedEntry.srno}`, updatedEntry),
+    mutationFn: (updatedEntry) => axios.put(`http://192.168.45.129:5000/api/atteninfo/${updatedEntry.srno}`, updatedEntry),
     onSuccess: () => {
       queryClient.invalidateQueries(['attenInfo', searchTicketNo]);
       setEditingEntry(null);

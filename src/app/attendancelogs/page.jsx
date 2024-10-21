@@ -12,7 +12,7 @@ export default function AttendanceLogs() {
 
   const { data: logsData, isLoading, error } = useQuery({
     queryKey: ['attendanceLogs', searchEmployeeId],
-    queryFn: () => axios.get(`http://localhost:3001/api/attendancelogs?EmployeeId=${searchEmployeeId}`).then(res => res.data),
+    queryFn: () => axios.get(`http://192.168.45.129:5000/api/attendancelogs?EmployeeId=${searchEmployeeId}`).then(res => res.data),
     enabled: !!searchEmployeeId,
     onError: (error) => {
       console.error('Error fetching attendance logs:', error);
@@ -21,7 +21,7 @@ export default function AttendanceLogs() {
   });
 
   const updateMutation = useMutation({
-    mutationFn: (updatedEntry) => axios.put(`http://localhost:3001/api/attendancelogs/${updatedEntry.AttendanceLogId}`, updatedEntry),
+    mutationFn: (updatedEntry) => axios.put(`http://192.168.45.129:5000/api/attendancelogs/${updatedEntry.AttendanceLogId}`, updatedEntry),
     onSuccess: () => {
       queryClient.invalidateQueries(['attendanceLogs', searchEmployeeId]);
       setEditingEntry(null);
